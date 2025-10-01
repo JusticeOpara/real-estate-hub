@@ -1,53 +1,55 @@
-import express from "express";
-import cors from "cors";
-const mongoose = require('mongoose');
+const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const rateLimit = require('express-rate-limit');
+const connectDB = require('./config/database');
+const errorHandler = require('./middleware/error.middleware');
 
-// Load environment variables
+// Load env vars
 dotenv.config();
 
-// Import routes
-const authRoutes = require('./routes/auth.routes');
-const propertyRoutes = require('./routes/property.routes');
-const userRoutes = require('./routes/user.routes');
-const favoriteRoutes = require('./routes/favorite.routes');
-const adminRoutes = require('./routes/admin.routes');
+// Connect to database
+connectDB();
 
-// Initialize Express app
 const app = express();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Security middleware
+app.use(helmet());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  credentials: true
+}));
 
-// Database connection
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('✅ MongoDB Connected'))
-.catch((err) => console.error('❌ MongoDB Connection Error:', err));
-
-// API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/properties', propertyRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/favorites', favoriteRoutes);
-app.use('/api/admin', adminRoutes);
-
-// Health check route
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'RealEstateHub API is running' });
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
 });
+app.use('/api/', limiter);
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(err.status || 500).json({
-    success: false,
-    message: err.message || 'Internal Server Error',
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+// Body parser
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Logging
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
+// Routes
+app.use('/api/auth', require('./routes/auth.route'));
+app.use('/api/properties', require('./routes/properties.route'));
+app.use('/api/favorites', require('./routes/favourite.route'));
+app.use('/api/admin', require('./routes/admin.route'));
+
+// Health check
+app.get('/api/health', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Server is running',
+    timestamp: new Date().toISOString()
   });
 });
 
@@ -59,8 +61,19 @@ app.use((req, res) => {
   });
 });
 
-// Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+// Error handler (must be last)
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 5001;
+
+const server = app.listen(PORT, () => {
+  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
 });
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err) => {
+  console.log(`Error: ${err.message}`);
+  server.close(() => process.exit(1));
+});
+
+module.exports = app;
