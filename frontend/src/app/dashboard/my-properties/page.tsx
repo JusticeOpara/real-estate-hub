@@ -7,7 +7,7 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import api from '@/lib/api';
 import { Property } from '@/types';
 import Link from 'next/link';
-import { PlusCircle, Edit, Trash2 } from 'lucide-react';
+import { PlusCircle,  Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { AxiosError } from 'axios';
 

@@ -4,11 +4,18 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { User } from "@/types";
 import { authService } from "@/lib/auth";
 
+interface RegisterType{
+  name: string,
+  email: string,
+  password: string,
+  role: string,
+  phone: string
+}
 interface AuthContextType {
   user: User | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-   register: (data: any) => Promise<void>;
+   register: (data: RegisterType) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
 }
@@ -34,6 +41,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setUser(response.data.user);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const register = async (data: any) => {
     const response = await authService.register(data);
     setUser(response.data.user);

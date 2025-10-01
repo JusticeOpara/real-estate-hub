@@ -13,7 +13,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange, initialFi
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<PropertyFilters>(initialFilters || {});
 
-  const handleChange = (key: keyof PropertyFilters, value: any) => {
+  const handleChange = (key: keyof PropertyFilters, value: unknown) => {
     const newFilters = { ...filters, [key]: value };
     setFilters(newFilters);
   };

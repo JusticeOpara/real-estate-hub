@@ -44,10 +44,23 @@ export const authService = {
 
   getStoredUser(): User | null {
     if (typeof window !== 'undefined') {
-      const user = localStorage.getItem('user');
-      return user ? JSON.parse(user) : null;
+  const user = localStorage.getItem('user');
+  if (user) {
+    try {
+      return JSON.parse(user);
+    } catch {
+      return null; // fallback if JSON is broken
     }
-    return null;
+  }
+}
+return null;
+
+    // if (typeof window !== 'undefined') {
+    //   const user = localStorage.getItem('user');
+    //   return user !== null ? JSON.parse(user) : null;
+
+    // }
+    // return null;
   },
 
   isAuthenticated(): boolean {

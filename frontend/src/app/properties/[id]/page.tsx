@@ -22,6 +22,7 @@ import {
 import toast from 'react-hot-toast';
 import { useAuth } from '@/context/AuthContext';
 import { AxiosError } from 'axios';
+import Image from 'next/image';
 
 export default function PropertyDetailPage() {
   const params = useParams();
@@ -102,7 +103,8 @@ export default function PropertyDetailPage() {
             {/* Image Gallery */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
               <div className="relative h-96 md:h-[500px]">
-                <img
+                <Image
+                  fill
                   src={property.images[currentImageIndex]?.url || 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800'}
                   alt={property.title}
                   className="w-full h-full object-cover"
@@ -174,7 +176,8 @@ export default function PropertyDetailPage() {
                           : 'border-transparent'
                       }`}
                     >
-                      <img
+                      <Image
+                        fill
                         src={image.url}
                         alt={`View ${index + 1}`}
                         className="w-full h-full object-cover"
