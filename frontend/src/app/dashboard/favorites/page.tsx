@@ -6,6 +6,7 @@ import PropertyCard from '@/components/PropertyCard';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import api from '@/lib/api';
 import { Property } from '@/types';
+import Link from 'next/link';
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<Property[]>([]);
@@ -47,12 +48,9 @@ export default function FavoritesPage() {
                 <p className="text-gray-600 mb-6">
                   Start exploring properties and save your favorites
                 </p>
-                <a
-                  href="/properties"
-                  className="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
-                >
-                  Browse Properties
-                </a>
+              <Link href="/properties" className="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors">
+  Browse Properties
+</Link>
               </div>
             </div>
           ) : (

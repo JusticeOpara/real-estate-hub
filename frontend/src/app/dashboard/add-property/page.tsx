@@ -7,6 +7,7 @@ import api from '@/lib/api';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { Home, MapPin, DollarSign, ImagePlus } from 'lucide-react';
+import { AxiosError } from 'axios';
 
 export default function AddPropertyPage() {
   const router = useRouter();
@@ -85,7 +86,8 @@ export default function AddPropertyPage() {
       await api.post('/properties', propertyData);
       toast.success('Property listed successfully!');
       router.push('/dashboard/my-properties');
-    } catch (error: any) {
+    } catch (err) {
+        const error = err as AxiosError<{ message?: string }>;
       toast.error(error.response?.data?.message || 'Failed to add property');
     } finally {
       setLoading(false);

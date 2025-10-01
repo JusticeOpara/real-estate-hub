@@ -8,6 +8,8 @@ import { MapPin, Bed, Bath, Maximize, Heart, Eye } from 'lucide-react';
 import api from '@/lib/api';
 import toast from 'react-hot-toast';
 import { useAuth } from '@/context/AuthContext';
+import Image from 'next/image';
+import { AxiosError } from 'axios';
 
 
 interface PropertyCardProps {
@@ -40,7 +42,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onFavoriteChange 
         setIsFavorite(true);
       }
       onFavoriteChange?.();
-    } catch (error: any) {
+    } catch (err) {
+    const error = err as AxiosError<{ message?: string }>;
       toast.error(error.response?.data?.message || 'Failed to update favorites');
     } finally {
       setIsLoading(false);
@@ -52,7 +55,9 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onFavoriteChange 
       <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 group">
         {/* Image */}
         <div className="relative h-64 overflow-hidden">
-          <img
+          <Image
+          width={100}
+          height={100}
             src={property.images[0]?.url || 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800'}
             alt={property.title}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"

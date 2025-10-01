@@ -9,6 +9,7 @@ import { Property } from '@/types';
 import Link from 'next/link';
 import { PlusCircle, Edit, Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { AxiosError } from 'axios';
 
 export default function MyPropertiesPage() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -38,7 +39,8 @@ export default function MyPropertiesPage() {
       await api.delete(`/properties/${id}`);
       toast.success('Property deleted successfully');
       fetchMyProperties();
-    } catch (error: any) {
+    } catch (err) {
+     const error = err as AxiosError<{ message?: string }>;
       toast.error(error.response?.data?.message || 'Failed to delete property');
     }
   };

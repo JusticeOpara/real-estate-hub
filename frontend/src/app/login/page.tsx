@@ -7,6 +7,7 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { LogIn, Mail, Lock, Home } from 'lucide-react';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import { AxiosError } from 'axios';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -23,7 +24,9 @@ export default function LoginPage() {
       await login(email, password);
       toast.success('Login successful!');
       router.push('/dashboard');
-    } catch (error: any) {
+    } catch (err) {
+    const error = err as AxiosError<{ message?: string }>;
+    toast.error(error.response?.data?.message || "Registration failed");
       toast.error(error.response?.data?.message || 'Login failed');
     } finally {
       setLoading(false);
@@ -102,7 +105,7 @@ export default function LoginPage() {
           {/* Divider */}
           <div className="mt-6 text-center">
             <p className="text-gray-600">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link href="/register" className="text-primary-600 font-semibold hover:text-primary-700">
                 Sign up
               </Link>

@@ -7,6 +7,9 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { UserPlus, Mail, Lock, User as UserIcon, Phone, Home } from 'lucide-react';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import { AxiosError } from 'axios';
+
+
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -50,7 +53,8 @@ export default function RegisterPage() {
       });
       toast.success('Registration successful!');
       router.push('/dashboard');
-    } catch (error: any) {
+    } catch (err ) {
+        const error = err as AxiosError<{ message?: string }>;
       toast.error(error.response?.data?.message || 'Registration failed');
     } finally {
       setLoading(false);

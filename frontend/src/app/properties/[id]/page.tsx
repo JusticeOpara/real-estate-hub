@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useAuth } from '@/context/AuthContext';
+import { AxiosError } from 'axios';
 
 export default function PropertyDetailPage() {
   const params = useParams();
@@ -65,7 +66,8 @@ export default function PropertyDetailPage() {
         toast.success('Added to favorites');
         setIsFavorite(true);
       }
-    } catch (error: any) {
+    } catch (err) {
+        const error = err as AxiosError<{ message?: string }>;
       toast.error(error.response?.data?.message || 'Failed to update favorites');
     }
   };

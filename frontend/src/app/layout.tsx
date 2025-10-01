@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { AuthProvider } from '@/context/AuthContext';
 import { Toaster } from 'react-hot-toast';
-import Navbar from '@/components/NavBar';
+import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import './globals.css'
 
@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning>
         <AuthProvider>
           <div className="flex flex-col min-h-screen">
             <Navbar />
