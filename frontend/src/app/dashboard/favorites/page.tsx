@@ -15,11 +15,12 @@ export default function FavoritesPage() {
   useEffect(() => {
     fetchFavorites();
   }, []);
+  console.log(favorites,"--favorties")
 
   const fetchFavorites = async () => {
     try {
       const response = await api.get('/favorites');
-      setFavorites(response.data.data.favorites.map((fav: any) => fav.property));
+      setFavorites(response.data.data.favorites.map((fav) => fav.property));
     } catch (error) {
       console.error('Error fetching favorites:', error);
     } finally {
