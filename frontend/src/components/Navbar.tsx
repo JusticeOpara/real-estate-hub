@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
-import { Menu, X, Home, Heart, PlusCircle, User, LogOut, LayoutDashboard } from 'lucide-react';
+import { Menu, X, Heart, PlusCircle, User, LogOut, LayoutDashboard } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 const Navbar: React.FC = () => {
@@ -14,15 +14,15 @@ const Navbar: React.FC = () => {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
+    <nav className="bg-[#141414] shadow-lg sticky top-0 z-50 border-b border-[#262626]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between h-20">
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <Home className="w-8 h-8 text-primary-600" />
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
-                RealEstateHub
+
+              <span className="text-xl font-bold text-white">
+                Estatein
               </span>
             </Link>
           </div>
@@ -33,8 +33,8 @@ const Navbar: React.FC = () => {
               href="/properties"
               className={`${
                 isActive('/properties')
-                  ? 'text-primary-600'
-                  : 'text-gray-700 hover:text-primary-600'
+                  ? 'text'
+                  : 'text-white hover:text-primary-600'
               } transition-colors font-medium`}
             >
               Properties
@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
                 {user?.role === 'seller' && (
                   <Link
                     href="/dashboard/add-property"
-                    className="flex items-center space-x-1 text-gray-700 hover:text-primary-600 transition-colors font-medium"
+                    className="flex items-center space-x-1 text-gray-700 hover:text-primary-60 transition-colors font-medium"
                   >
                     <PlusCircle className="w-4 h-4" />
                     <span>List Property</span>
@@ -92,13 +92,13 @@ const Navbar: React.FC = () => {
               <>
                 <Link
                   href="/login"
-                  className="text-gray-700 hover:text-primary-600 transition-colors font-medium"
+                  className="text-white  transition-colors font-medium"
                 >
                   Login
                 </Link>
                 <Link
                   href="/register"
-                  className="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors font-medium"
+                  className="bg-primary-600 text-white px-6 py-2 rounded-lg  transition-colors font-medium"
                 >
                   Sign Up
                 </Link>
@@ -124,11 +124,11 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t animate-slide-down">
+        <div className="md:hidden  border-t animate-slide-down">
           <div className="px-4 py-4 space-y-3">
             <Link
               href="/properties"
-              className="block text-gray-700 hover:text-primary-600 py-2 font-medium"
+              className="block text-white hover:text-primary-600 py-2 font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
               Properties
@@ -139,7 +139,7 @@ const Navbar: React.FC = () => {
                 {user?.role === 'seller' && (
                   <Link
                     href="/dashboard/add-property"
-                    className="block text-gray-700 hover:text-primary-600 py-2 font-medium"
+                    className="block text-white hover:text-primary-600 py-2 font-medium"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     List Property
@@ -148,7 +148,7 @@ const Navbar: React.FC = () => {
 
                 <Link
                   href="/dashboard/favorites"
-                  className="block text-gray-700 hover:text-primary-600 py-2 font-medium"
+                  className="block text-white hover:text-primary-600 py-2 font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Favorites
@@ -156,7 +156,7 @@ const Navbar: React.FC = () => {
 
                 <Link
                   href="/dashboard"
-                  className="block text-gray-700 hover:text-primary-600 py-2 font-medium"
+                  className="block text-white hover:text-primary-600 py-2 font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Dashboard
@@ -176,7 +176,7 @@ const Navbar: React.FC = () => {
               <>
                 <Link
                   href="/login"
-                  className="block text-gray-700 hover:text-primary-600 py-2 font-medium"
+                  className="block text-white hover:text-primary-600 py-2 font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Login

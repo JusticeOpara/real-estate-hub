@@ -29,29 +29,29 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange, initialFi
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6">
+    <div className="bg-[#1A1A1A] border border-[#262626] rounded-xl p-6">
       {/* Search Bar */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="flex-1 relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#999999] w-5 h-5" />
           <input
             type="text"
             placeholder="Search by title or description..."
             value={filters.search || ''}
             onChange={(e) => handleChange('search', e.target.value)}
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+            className="w-full pl-10 pr-4 py-3 bg-[#141414] border border-[#262626] text-white rounded-lg focus:ring-2 focus:ring-[#703BF7] focus:border-[#703BF7] outline-none placeholder-[#666666]"
           />
         </div>
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className="flex items-center justify-center space-x-2 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+          className="flex items-center justify-center space-x-2 px-6 py-3 border border-[#262626] text-white rounded-lg hover:bg-[#262626] hover:border-[#703BF7] transition-all"
         >
           <SlidersHorizontal className="w-5 h-5" />
           <span>Filters</span>
         </button>
         <button
           onClick={handleSearch}
-          className="px-8 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium"
+          className="px-8 py-3 bg-[#703BF7] text-white rounded-lg hover:bg-[#8254f8] transition-colors font-medium"
         >
           Search
         </button>
@@ -59,16 +59,16 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange, initialFi
 
       {/* Advanced Filters */}
       {showFilters && (
-        <div className="mt-6 pt-6 border-t grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-slide-down">
+        <div className="mt-6 pt-6 border-t border-[#262626] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Property Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               Property Type
             </label>
             <select
               value={filters.propertyType || ''}
               onChange={(e) => handleChange('propertyType', e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-2 bg-[#141414] border border-[#262626] text-white rounded-lg focus:ring-2 focus:ring-[#703BF7] focus:border-[#703BF7] outline-none"
             >
               <option value="">All Types</option>
               <option value="house">House</option>
@@ -81,13 +81,13 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange, initialFi
 
           {/* Listing Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               Listing Type
             </label>
             <select
               value={filters.listingType || ''}
               onChange={(e) => handleChange('listingType', e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-2 bg-[#141414] border border-[#262626] text-white rounded-lg focus:ring-2 focus:ring-[#703BF7] focus:border-[#703BF7] outline-none"
             >
               <option value="">All</option>
               <option value="sale">For Sale</option>
@@ -97,7 +97,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange, initialFi
 
           {/* City */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               City
             </label>
             <input
@@ -105,13 +105,13 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange, initialFi
               placeholder="Enter city"
               value={filters.city || ''}
               onChange={(e) => handleChange('city', e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-2 bg-[#141414] border border-[#262626] text-white rounded-lg focus:ring-2 focus:ring-[#703BF7] focus:border-[#703BF7] outline-none placeholder-[#666666]"
             />
           </div>
 
           {/* Min Price */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               Min Price
             </label>
             <input
@@ -119,13 +119,13 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange, initialFi
               placeholder="0"
               value={filters.minPrice || ''}
               onChange={(e) => handleChange('minPrice', e.target.value ? Number(e.target.value) : undefined)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-2 bg-[#141414] border border-[#262626] text-white rounded-lg focus:ring-2 focus:ring-[#703BF7] focus:border-[#703BF7] outline-none placeholder-[#666666]"
             />
           </div>
 
           {/* Max Price */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               Max Price
             </label>
             <input
@@ -133,19 +133,19 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange, initialFi
               placeholder="Any"
               value={filters.maxPrice || ''}
               onChange={(e) => handleChange('maxPrice', e.target.value ? Number(e.target.value) : undefined)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-2 bg-[#141414] border border-[#262626] text-white rounded-lg focus:ring-2 focus:ring-[#703BF7] focus:border-[#703BF7] outline-none placeholder-[#666666]"
             />
           </div>
 
           {/* Bedrooms */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               Min Bedrooms
             </label>
             <select
               value={filters.bedrooms || ''}
               onChange={(e) => handleChange('bedrooms', e.target.value ? Number(e.target.value) : undefined)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-2 bg-[#141414] border border-[#262626] text-white rounded-lg focus:ring-2 focus:ring-[#703BF7] focus:border-[#703BF7] outline-none"
             >
               <option value="">Any</option>
               <option value="1">1+</option>
@@ -158,13 +158,13 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange, initialFi
 
           {/* Bathrooms */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               Min Bathrooms
             </label>
             <select
               value={filters.bathrooms || ''}
               onChange={(e) => handleChange('bathrooms', e.target.value ? Number(e.target.value) : undefined)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-2 bg-[#141414] border border-[#262626] text-white rounded-lg focus:ring-2 focus:ring-[#703BF7] focus:border-[#703BF7] outline-none"
             >
               <option value="">Any</option>
               <option value="1">1+</option>
@@ -176,13 +176,13 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange, initialFi
 
           {/* Sort */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               Sort By
             </label>
             <select
               value={filters.sort || ''}
               onChange={(e) => handleChange('sort', e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-2 bg-[#141414] border border-[#262626] text-white rounded-lg focus:ring-2 focus:ring-[#703BF7] focus:border-[#703BF7] outline-none"
             >
               <option value="-createdAt">Newest First</option>
               <option value="createdAt">Oldest First</option>
@@ -195,7 +195,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onFilterChange, initialFi
           <div className="sm:col-span-2 lg:col-span-4 flex justify-end">
             <button
               onClick={handleReset}
-              className="flex items-center space-x-2 px-6 py-2 text-gray-700 hover:text-red-600 transition-colors"
+              className="flex items-center space-x-2 px-6 py-2 text-[#999999] hover:text-red-500 transition-colors"
             >
               <X className="w-4 h-4" />
               <span>Reset Filters</span>

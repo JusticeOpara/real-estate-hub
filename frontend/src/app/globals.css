@@ -3,7 +3,7 @@
 
 @tailwind utilities;
 
-@theme {
+/* @theme {
   --color-primary-50:  #f0f9ff;
   --color-primary-100: #e0f2fe;
   --color-primary-200: #bae6fd;
@@ -14,6 +14,40 @@
   --color-primary-700: #0369a1;
   --color-primary-800: #075985;
   --color-primary-900: #0c4a6e;
+}  */
+
+
+
+@theme {
+  --color-primary-50:  #FFFCFA;
+  --color-primary-60:  #FF7A00;
+  --color-primary-65:  #1A64FF;
+  --color-primary-70:  #FF9533;
+  --color-primary-75:  #FFCA99;
+  --color-primary-90:  #FFE4CC;
+  --color-primary-95:  #FFF1E5;
+  --color-primary-97:  #FFF7F0;
+  --color-primary-99:  #FFFCFA;
+  
+  /* White shades for backgrounds */
+  --color-white-90: #E4E4E7;
+  --color-white-95: #F1F1F3;
+  --color-white-97: #F7F7F8;
+  --color-white-99: #FCFCFD;
+  
+  /* Grey shades for text and UI elements */
+  --color-grey-08: #141414;
+  --color-grey-10: #1A1A1A;
+  --color-grey-15: #262626;
+  --color-grey-20: #333333;
+  --color-grey-30: #4D4D4D;
+  --color-grey-40: #666666;
+  --color-grey-50: #808080;
+  --color-grey-60: #999999;
+  
+  /* Absolute colors */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
 }
 /* Add this section so Tailwind v4 will emit your keyframes */
 @theme {
